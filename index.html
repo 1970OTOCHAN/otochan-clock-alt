@@ -76,7 +76,7 @@ body{
   .row .alt{font-size:.92em}
 }
 .alt{display:flex;gap:.04em;align-items:baseline;justify-content:center;white-space:nowrap;font-variant-numeric:tabular-nums;font-family:var(--f-num);font-weight:600;color:#fff;font-size:clamp(24px,min(10vmin,8.5vw),96px);line-height:1}
-.alt .al{display:none}
+.alt .al{display:inline;font-family:var(--f-ui);font-weight:700;font-size:.32em;margin-right:.2em;align-self:center}
 
 .info .wd{font-family:var(--f-ui);font-weight:700;font-size:.8em}
 
@@ -122,9 +122,9 @@ body{
 <main class="face" id="face">
   <div class="time-wrap" id="wrap">
     <div class="time" id="time" aria-live="off"></div>
-    <div class="row" id="row"><div class="info" id="info"><span class="yr" id="yr"></span><span class="md"><span class="sep">/</span><span id="date"></span><span class="wd" id="wd"></span></span></div><div class="alt" id="alt"><span id="altv">---</span><span class="au">m</span></div></div>
+    <div class="row" id="row"><div class="info" id="info"><span class="yr" id="yr"></span><span class="md"><span class="sep">/</span><span id="date"></span><span class="wd" id="wd"></span></span></div><div class="alt" id="alt"><span class="al">標高</span><span id="altv">---</span><span class="au">m</span></div></div>
   </div>
-  <div class="brand">1970otochan™clock ALT<span class="yomi">1970おとーちゃんクロック ALT　Ver.1.0</span></div>
+  <div class="brand">1970otochan™clock ALT<span class="yomi">1970おとーちゃんクロック ALT　Ver.1.1</span></div>
 </main>
 
 <div class="hint" id="hint">画面をタップで設定</div>
