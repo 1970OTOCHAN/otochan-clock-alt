@@ -142,7 +142,7 @@ body{
     <div class="time" id="time" aria-live="off"></div>
     <div class="row" id="row"><div class="info" id="info"><span class="yr" id="yr"></span><span class="md"><span class="sep">/</span><span id="date"></span><span class="wd" id="wd"></span></span></div><div class="alt" id="alt"><span class="al">標高</span><span id="altv">---</span><span class="au">m</span></div></div>
   </div>
-  <div class="brand">1970otochan™clock ALT<span class="yomi">1970おとーちゃんクロック ALT　Ver.1.4</span></div>
+  <div class="brand">1970otochan™clock ALT<span class="yomi">1970おとーちゃんクロック ALT　Ver.1.5</span></div>
 </main>
 
 <div class="hint" id="hint">画面をタップで設定</div>
@@ -336,16 +336,22 @@ body{
   if(standalone)$("bFull").hidden=true;
   if("serviceWorker" in navigator){
     const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
-    navigator.serviceWorker.addEventListener("controllerchange",()=>{if(hadCtl&&!reloaded){reloaded=true;location.reload()}});
+    /* 新しい版に切り替わったとき：計測中は読み込み直さない（次に開いたときに新しい版になる）。
+       オープニング中は、読んでいた位置を覚えてから読み込み直し、同じ位置に戻す（Ver.1.5） */
+    navigator.serviceWorker.addEventListener("controllerchange",()=>{
+      if(!hadCtl||reloaded||window.otochanStarted)return;reloaded=true;
+      try{const o=document.getElementById("op");if(o)sessionStorage.setItem("rideclock-alt-scroll",String(o.scrollTop))}catch(e){}
+      location.reload();
+    });
     navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>r.update()).catch(()=>{});
   }
-  window.otochanStart=()=>{startGeo();keepOn();showBar()};
+  window.otochanStart=()=>{window.otochanStarted=true;startGeo();keepOn();showBar()};
   showSync();apply();fit();loop();keepOn();showBar();syncTime(false);
 })();
 </script>
 <div class="op" id="op" role="dialog" aria-label="ご利用の前に">
   <h1>1970otochan™clock ALT</h1>
-  <div class="y">1970おとーちゃんクロック ALT　Ver.1.4</div>
+  <div class="y">1970おとーちゃんクロック ALT　Ver.1.5</div>
   <div class="warn">
     <h2>必ずお読みください</h2>
     <ul>
@@ -373,6 +379,6 @@ body{
   <div class="agree">「同意してスタート」を押すと、上記の内容に同意したものとします。</div>
   <button class="go" id="go" type="button">同意してスタート</button>
 </div>
-<script>{const o=document.getElementById("op");document.getElementById("go").addEventListener("click",e=>{e.stopPropagation();o.classList.add("out");setTimeout(()=>o.remove(),450);if(window.otochanStart)window.otochanStart()});}</script>
+<script>{const o=document.getElementById("op");try{const s=sessionStorage.getItem("rideclock-alt-scroll");if(s!==null){sessionStorage.removeItem("rideclock-alt-scroll");requestAnimationFrame(()=>{o.scrollTop=+s})}}catch(e){}document.getElementById("go").addEventListener("click",e=>{e.stopPropagation();o.classList.add("out");setTimeout(()=>o.remove(),450);if(window.otochanStart)window.otochanStart()});}</script>
 </body>
 </html>
