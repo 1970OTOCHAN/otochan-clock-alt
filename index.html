@@ -142,7 +142,7 @@ body{
     <div class="time" id="time" aria-live="off"></div>
     <div class="row" id="row"><div class="info" id="info"><span class="yr" id="yr"></span><span class="md"><span class="sep">/</span><span id="date"></span><span class="wd" id="wd"></span></span></div><div class="alt" id="alt"><span class="al">標高</span><span id="altv">---</span><span class="au">m</span></div></div>
   </div>
-  <div class="brand">1970otochan™clock ALT<span class="yomi">1970おとーちゃんクロック ALT　Ver.1.5</span></div>
+  <div class="brand">1970otochan™clock ALT<span class="yomi">1970おとーちゃんクロック ALT　Ver.1.6</span></div>
 </main>
 
 <div class="hint" id="hint">画面をタップで設定</div>
@@ -351,7 +351,7 @@ body{
 </script>
 <div class="op" id="op" role="dialog" aria-label="ご利用の前に">
   <h1>1970otochan™clock ALT</h1>
-  <div class="y">1970おとーちゃんクロック ALT　Ver.1.5</div>
+  <div class="y">1970おとーちゃんクロック ALT　Ver.1.6</div>
   <div class="warn">
     <h2>必ずお読みください</h2>
     <ul>
@@ -380,5 +380,6 @@ body{
   <button class="go" id="go" type="button">同意してスタート</button>
 </div>
 <script>{const o=document.getElementById("op");try{const s=sessionStorage.getItem("rideclock-alt-scroll");if(s!==null){sessionStorage.removeItem("rideclock-alt-scroll");requestAnimationFrame(()=>{o.scrollTop=+s})}}catch(e){}document.getElementById("go").addEventListener("click",e=>{e.stopPropagation();o.classList.add("out");setTimeout(()=>o.remove(),450);if(window.otochanStart)window.otochanStart()});}</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e75f1ba2a4504431bdc7f3ccb9d2206a"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
